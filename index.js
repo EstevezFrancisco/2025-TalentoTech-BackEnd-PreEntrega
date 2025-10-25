@@ -21,3 +21,27 @@ if (method === "GET" && resource.startsWith("products/")) {
     }
 }
 
+
+// npm start POST products Buzo 15990 abrigo
+if (method === "POST" && resource === "products") {
+    let [, , title, price, category = "generico"] = process.argv;
+    price = parseFloat(price);
+    category = category.toLowerCase();
+
+    if (!isNaN(price) || price <= 0) {
+        const product = {
+            title: title,
+            price: price,
+            category: category
+        };
+        fetch('https://fakestoreapi.com/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(product)
+        })
+            .then(response => response.json())
+            .then(data => console.log(data));
+    } else {
+        console.log("Error: El precio debe ser un valor positivo.");
+    }
+}
