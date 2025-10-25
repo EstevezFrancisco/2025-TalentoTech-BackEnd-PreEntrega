@@ -1,6 +1,5 @@
-const method = process.argv[2].toUpperCase()
-const resource = process.argv[3].toLowerCase()
-
+const method = process.argv[2].toUpperCase();
+const resource = process.argv[3].toLowerCase();
 
 // npm start GET products
 if (method === "GET" && resource === "products") {
@@ -23,11 +22,11 @@ if (method === "GET" && resource.startsWith("products/")) {
 
 // npm start POST products Buzo 15990 abrigo
 if (method === "POST" && resource === "products") {
-    let [, , title, price, category = "generico"] = process.argv;
+    let [, , , , title, price, category = "generico"] = process.argv;
     price = parseFloat(price);
     category = category.toLowerCase();
 
-    if (!isNaN(price) || price <= 0) {
+    if (!isNaN(price) && price <= 0) {
         const product = {
             title: title,
             price: price,
